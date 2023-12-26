@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Collapse, Nav, NavItem, Navbar, NavbarToggler } from "reactstrap";
 
 export default function Layout({children, links}){
@@ -23,6 +23,7 @@ export default function Layout({children, links}){
                     </Nav>
                 </Collapse>
             </Navbar>
+            <Outlet/>
         </>
     )
 }

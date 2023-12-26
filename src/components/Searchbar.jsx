@@ -1,6 +1,11 @@
-export default function Searchbar(){
-    return <div className="searchbar">
-        <input type="text" placeholder="Search" />
-        <button>Search</button>
+import { InputGroup, InputGroupText } from "reactstrap";
+
+export default function Searchbar() {
+  return (
+    <div>
+      <InputGroup size="lg">
+        <InputGroupText>Search</InputGroupText>
+      </InputGroup>
     </div>
+  );
 }
