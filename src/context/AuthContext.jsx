@@ -36,7 +36,10 @@ export const AuthContextProvider = ({children}) => {
             }else{
                 navigate('/', {replace: true});
             }
-        });
+        })
+        return () => {
+            authListener.subscription.unsubscribe();
+        }
     },[]);
 
     return (
