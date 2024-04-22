@@ -2,20 +2,22 @@ import './App.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient('https://znkpacfqnuhcosliyayx.supabase.co', process.env.REACT_APP_SUPABASE_ANON_KEY);
+import { AuthContextProvider } from './context/AuthContext';
+import Login from './pages/Login';
 
 function App() {
   
   const router = createBrowserRouter([
     { path: '/', component: Home, element: <Home /> },
     { path: '/about', component: About, element: <About /> },
+    { path: '/login', component: About, element: <Login /> },
   ]);
   
 
   return (
-   <RouterProvider router={router} />
+   <AuthContextProvider>
+    <RouterProvider router={router} />
+   </AuthContextProvider>
   );
 }
 
