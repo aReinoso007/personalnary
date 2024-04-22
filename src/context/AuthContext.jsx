@@ -1,9 +1,11 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabase/supabase.config";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 export const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState([]);
+    const navigate = useNavigate();
 
     async function signInWithGoogle(){
         try {
@@ -26,6 +28,16 @@ export const AuthContextProvider = ({children}) => {
             console.log(error);
         }
     }
+
+    useEffect(()=>{
+        const {data: authListener} = supabase.auth.onAuthStateChange(async (event, session)=>{
+            if(session === null){
+                navigate('/login', {replace: true});
+            }else{
+                navigate('/', {replace: true});
+            }
+        });
+    },[]);
 
     return (
         <AuthContext.Provider value={{user, setUser, signInWithGoogle, signOut}}>
